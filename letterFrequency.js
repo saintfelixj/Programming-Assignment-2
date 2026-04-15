@@ -1,27 +1,29 @@
 Jerell Saint-Felix
 
-const readlineSync = require('readline-sync');
+ const readlineSync = require('readline-sync');
 
-let text = readlineSync.question("Enter a string: ");
-let lowerText = text.toLowerCase();
+let input = readlineSync.question("Enter a string: ");
+input = input.toLowerCase();
 
 let freq = {};
 let firstRepeat = "";
 
-for (let i = 0; i < lowerText.length; i++) {
-    let ch = lowerText[i];
+// count letters
+for (let i = 0; i < input.length; i++) {
+    let ch = input[i];
 
     if (ch >= 'a' && ch <= 'z') {
-        if (freq[ch]) {
-            freq[ch]++;
-        } else {
+        if (freq[ch] == undefined) {
             freq[ch] = 1;
+        } else {
+            freq[ch]++;
         }
     }
 }
 
-for (let i = 0; i < lowerText.length; i++) {
-    let ch = lowerText[i];
+// find first repeat
+for (let i = 0; i < input.length; i++) {
+    let ch = input[i];
 
     if (ch >= 'a' && ch <= 'z' && freq[ch] > 1) {
         firstRepeat = ch;
@@ -34,8 +36,4 @@ for (let key in freq) {
     console.log(key + ": " + freq[key]);
 }
 
-if (firstRepeat !== "") {
-    console.log("First repeated letter: " + firstRepeat);
-} else {
-    console.log("First repeated letter: none");
-}
+console.log("First repeated letter: " + firstRepeat);
